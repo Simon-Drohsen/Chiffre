@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Polybios</title>
+        <link rel="stylesheet" href="../css/style.css">
+        <link rel="stylesheet" href="../../dist/output.css">
+    </head>
+    <body class="overflow-hidden">
+        <nav class="bg-zinc-900 py-3">
+            <ul class="flex justify-center items-center">
+                <li class="mr-4">
+                    <button class="rounded-full bg-lime-500 py-1 px-3"> <a href="index.html">Home</a></button>
+                </li>
+            </ul>
+        </nav>
+        <section class="mx-auto sm:w-fit flex justify-center items-center h-screen">
+            <div class="bg-slate-100 rounded-lg w-fit opacity-80">
+                <div class="w-fit px-3 mx-auto">
+                    <h2 class="text-2xl mb-8">Choose Text to encrypt</h2>
+                    <form action="../functionalities/encrypt.php" method="post">
+                        <div class="grid auto-rows-max gap-4">
+                            <div class="grid grid-cols-2">
+                                <label for="encrypt-text">Text to encrypt:</label>
+                                <input class="rounded-md py-0.5 px-2" type="text" id="encrypt-text" name="encrypt-text-polybios" placeholder="Text to encrypt" required>
+                            </div>
+                            <button class="text-left rounded-full bg-lime-500 py-1 px-3 w-fit" type="submit">Submit</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="w-fit mx-auto mt-8 mb-4">
+                    <h2 class="text-2xl mb-8">Choose Text to decrypt</h2>
+                    <form action="../functionalities/decrypt.php" method="post">
+                        <div class="grid auto-rows-max gap-4">
+                            <div class="grid grid-cols-2">
+                                <label for="decrypt-text">Text to decrypt:</label>
+                                <input class="rounded-md py-0.5 px-2" type="text" id="decrypt-text" name="decrypt-text-polybios" placeholder="Text to decrypt" required>
+                            </div>
+                            <button class="text-left rounded-full bg-lime-500 py-1 px-3 w-fit" type="submit">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>
