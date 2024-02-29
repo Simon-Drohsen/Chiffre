@@ -6,27 +6,27 @@ $finish = "";
 switch ($_SESSION['chosen']) {
     case 'caesar':
         $finish = encrypt_caesar($_POST['encrypt-shift-caesar'], $_POST['encrypt-text-caesar']);
-        $url = "../html/caesar.html";
+        $url = "../view/caesar.html";
         break;
     case 'aes256':
         $finish = encrypt_aes256($_POST['encrypt-text-aes256'], $_POST['encrypt-pass-aes256']);
-        $url = "../html/aes256.html";
+        $url = "../view/aes256.html";
         break;
     case 'md5':
         $finish = encrypt_md5_sha1($_POST['encrypt-text-md5']);
-        $url = "../html/md5.html";
+        $url = "../view/md5.html";
         break;
     case 'sha1':
         $finish = encrypt_md5_sha1($_POST['encrypt-text-sha1']);
-        $url = "../html/sha1.html";
+        $url = "../view/sha1.html";
         break;
     case 'polybios':
         $finish = encrypt_polybios_rot13($_POST['encrypt-text-polybios']);
-        $url = "../html/polybios.html";
+        $url = "../view/polybios.html";
         break;
     case 'rot13':
         $finish = encrypt_polybios_rot13($_POST['encrypt-text-rot13']);
-        $url = "../html/rot13.html";
+        $url = "../view/rot13.html";
         break;
     default:
         $finish = "Could not encrypt";
@@ -137,7 +137,7 @@ function encrypt_polybios_rot13($text): string {
         <nav class="bg-zinc-900 py-3">
             <ul class="flex justify-center items-center">
                 <li class="mr-4">
-                    <button class="rounded-full bg-lime-500 py-1 px-3"> <a href="../html/index.html">Home</a></button>
+                    <button class="rounded-full bg-lime-500 py-1 px-3"> <a href="../view/index.html">Home</a></button>
                     <button class="rounded-full bg-lime-500 py-1 px-3"> <a href=<?= $url?>>Back</a></button>
                 </li>
             </ul>

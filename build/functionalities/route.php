@@ -1,28 +1,29 @@
 <?php
-session_start();
-session_unset();
-$_SESSION['chosen'] = $_POST['choose'];
+    error_reporting(0);
+    session_start();
+    session_unset();
+    $_SESSION['chosen'] = $_POST['choose'];
 
-switch ($_SESSION['chosen']) {
-    case 'caesar':
-        header('location: ../../build/html/caesar.html');
-        break;
-    case 'aes256':
-        header('location: ../../build/html/aes256.html');
-        break;
-    case 'md5':
-        header('location: ../../build/html/md5.html');
-        break;
-    case 'sha1':
-        header('location: ../../build/html/sha1.html');
-        break;
-    case 'polybios':
-        header('location: ../../build/html/polybios.html');
-        break;
-    case 'rot13':
-        header('location: ../../build/html/rot13.html');
-        break;
-    default:
-        echo "Please choose a cypher";
-        break;
-}
+    switch ($_SESSION['chosen']) {
+        case 'caesar':
+            header('location: ../../build/view/caesar.html');
+            break;
+        case 'aes256':
+            header('location: ../../build/view/aes256.html');
+            break;
+        case 'md5':
+            header('location: ../../build/view/md5.html');
+            break;
+        case 'sha1':
+            header('location: ../../build/view/sha1.html');
+            break;
+        case 'polybios':
+            header('location: ../../build/view/polybios.html');
+            break;
+        case 'rot13':
+            header('location: ../../build/view/rot13.html');
+            break;
+        default:
+            header('location: ../../build/view/404.php');
+            break;
+    }

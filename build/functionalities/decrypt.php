@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 session_start();
 
 $finish = "";
@@ -6,27 +7,27 @@ $finish = "";
 switch ($_SESSION['chosen']) {
     case 'caesar':
         $finish = decrypt_caesar($_POST['decrypt-shift-caesar'], $_POST['decrypt-text-caesar']);
-        $url = "../html/caesar.html";
+        $url = "../view/caesar.html";
         break;
     case 'aes256':
         $finish = decrypt_aes256($_POST['decrypt-text-aes256'], $_POST['decrypt-pass-aes256']);
-        $url = "../html/aes256.html";
+        $url = "../view/aes256.html";
         break;
     case 'md5':
         $finish = decrypt_md5_sha1($_POST['decrypt-text-md5']);
-        $url = "../html/md5.html";
+        $url = "../view/md5.html";
         break;
     case 'sha1':
         $finish = decrypt_md5_sha1($_POST['decrypt-text-sha1']);
-        $url = "../html/sha1.html";
+        $url = "../view/sha1.html";
         break;
     case 'polybios':
         $finish = decrypt_polybios_rot13($_POST['decrypt-text-polybios']);
-        $url = "../html/polybios.html";
+        $url = "../view/polybios.html";
         break;
     case 'rot13':
         $finish = decrypt_polybios_rot13($_POST['decrypt-text-rot13']);
-        $url = "../html/rot13.html";
+        $url = "../view/rot13.html";
         break;
     default:
         $finish = "Could not decrypt";
@@ -100,7 +101,7 @@ function decrypt_aes256 ($encryptedText, $password): string | null {
     $ciphertext = substr($encryptedText, 48);
     $key = hash('sha256', $password, true);
 
-    if (!hash_equals(hash_hmac('sha256', $ciphertext . $iv, $key, true), $hash)) return null;
+    if (!hash_equals(hash_hmac('sha256', $ciphertext . $iv, $key, true), $hash)) return 'Invalid password';
 
     return openssl_decrypt($ciphertext, $method, $key, OPENSSL_RAW_DATA, $iv);
 }
@@ -115,10 +116,6 @@ function decrypt_polybios_rot13($text): string {
                 41=>"p", 42=>"q", 43=>"r", 44=>"s", 45=>"t",
                 51=>"u", 52=>"v", 53=>"w", 54=>"x", 55=>"y",
                 61=>"z", 62=>" "];
-
-        foreach (explode(" ", $text) as $let) {
-            $decrypted .= $alphabet[$let];
-        }
     } else {
         $alphabet = ['n'=>"a", 'o'=>"b", 'p'=>"c", 'q'=>"d", 'r'=>"e",
                 's'=>"f", 't'=>"g", 'u'=>"h", 'v'=>"i", 'w'=>"j",
@@ -126,10 +123,12 @@ function decrypt_polybios_rot13($text): string {
                 'c'=>"p", 'd'=>"q", 'e'=>"r", 'f'=>"s", 'g'=>"t",
                 'h'=>"u", 'i'=>"v", 'j'=>"w", 'k'=>"x", 'l'=>"y",
                 'm'=>"z", ' '=>" "];
-
-        foreach (str_split($text) as $let) {
-            $decrypted .= $alphabet[$let];
-        }
+    }
+    foreach (str_split($text) as $let) {
+        $decrypted .= $alphabet[$let];
+    }
+    if ($decrypted == "") {
+        return "Error: Invalid input";
     }
     return $decrypted;
 }
@@ -147,7 +146,7 @@ function decrypt_polybios_rot13($text): string {
         <nav class="bg-zinc-900 py-3">
             <ul class="flex justify-center items-center">
                 <li class="mr-4">
-                    <button class="rounded-full bg-lime-500 py-1 px-3"> <a href="../html/index.html">Home</a></button>
+                    <button class="rounded-full bg-lime-500 py-1 px-3"> <a href="../view/index.html">Home</a></button>
                     <button class="rounded-full bg-lime-500 py-1 px-3"> <a href=<?= $url?>>Back</a></button>
                 </li>
             </ul>
